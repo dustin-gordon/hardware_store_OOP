@@ -1,71 +1,111 @@
-/**
- * The item classes creates inventory items with and ID, name, category, quantity, and price
- * @author Dustin Gordon
- * @version 1.0
- * @since   1.0
- * @see Main, Inventory
- */
-package mainPackage;
+package hardwarestore;
 
-public class Item {
-	private String idNumber = null;
-	private String itemName = null;
-	private String category = null;
-	private int quantity = 0;
-	private float itemPrice = 0;
+/**
+ * The Item class represents hardware store inventory items. 
+ * Input validation of parameters is not handled directly by this class.
+ * 
+ * @author Dustin Gordon
+ * @version 2.1
+ * @since   1.0
+ */
+public class Item implements Comparable<Item> {
+	protected String idNumber;
+	protected String itemName;
+	protected int quantity;
+	protected float itemPrice;
 	
 	/**
-	 * Constructor for Item class creates 5 fields attributed to hardware store inventory items. 
+	 * Constructor which initializes Item objects.
+	 * 
+	 * @param idNumber A String representing the item's unique ID. Exactly 5 characters long, numbers and/or letters only.
+	 * @param itemName A String representing the item's unique name. 20 or less characters long.
+	 * @param quantity A positive integer representing the amount of the item currently in stock.
+	 * @param itemPrice A floating point representing the item's price
+	 * 
 	 */
-	public Item(String ID, String name, String cat, int qty, float price) {
-		idNumber = ID;
-		itemName = name;
-		category = cat;
-		quantity = qty;
-		itemPrice = price;
+	public Item(String idNumber, String itemName, int quantity, float itemPrice) {
+		this.idNumber = idNumber;
+		this.itemName = itemName;
+		this.quantity = quantity;
+		this.itemPrice = itemPrice;
 	}
 	
-	//Below methods return an individual attribute of the inventory item:
 	/**
-	 * ID number accessor
-	 * @return ID number
+	 * This method gets the item's identification number.
+	 * 
+	 * @return Item's ID number as a String.
 	 */
 	public String getID() {
 		return idNumber;
 	}
+	
 	/**
-	 * item name accessor
-	 * @return item name
+	 * This method gets the item's name.
+	 * 
+	 * @return Item's name as a String.
 	 */
 	public String getName() {
 		return itemName;
 	}
+	
 	/**
-	 * item category accessor
-	 * @return item category
-	 */
-	public String getCategory() {
-		return category;
-	}
-	/**
-	 * item quantity accessor
-	 * @return item quantity
+	 * This method gets the item's quantity.
+	 * 
+	 * @return Item's quantity as an integer.
 	 */
 	public int getQuantity() {
 		return quantity;
 	}
+	
 	/**
-	 * item price accessor 
-	 * @return item price
+	 * This method gets the item's price
+	 * .
+	 * @return Item's price as a float.
 	 */
 	public float getPrice() {
 		return itemPrice;
 	}
+	
 	/**
-	 * item price accessor
-	 * @param item price
+	 * Meant to be overridden by SmallItem class, so that getCategory()
+	 * can be called on an Item in ArrayList that happens to be SmallItem.
+	 * 
+	 * @return Test String
+	 */
+	public String getCategory() {
+		String test = "*ERROR*";
+		return test;
+	}
+	
+	/**
+	 * This method sets the item's quantity.
 	 */
 	public void setQuantity(int i) {
 		quantity = i;
 	}
+
+	
+	/**
+	 * This compares Item objects based on ID.
+	 * 
+	 * @return Comparison of two Item IDs.
+	 * @override
+	 */
+	public int compareTo(Item otherItem) {
+		String otherID = ((Item)otherItem).getID();
+		return idNumber.toLowerCase().compareTo(otherID.toLowerCase());
+	}
+	
+	/**
+	 * This method returns fields in neatly formatted table.
+	 * 
+	 * @return Formatted String of fields
+	 * @override
+	 */
+	public String toString() {
+		return String.format("| %-6s | %20s | %8s | %8.2f | %17s |", idNumber, itemName, quantity, itemPrice);
+    }
+
 }
+
+	
