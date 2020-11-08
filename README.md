@@ -9,6 +9,9 @@ Java programming concepts:
 4. Using data structures to store data in main memory (e.g. ArrayList).
 5. Working with character strings.
 6. Using Javadoc comments and generating and html documentation of the program.
+7. Unit testing
+8. GUI using MVC model
+9. Multithreading
 
 Description:
 For this assignment you will create a program to support a small hardware store. Your program
